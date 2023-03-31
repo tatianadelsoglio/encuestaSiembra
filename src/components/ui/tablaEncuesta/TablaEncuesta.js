@@ -91,7 +91,7 @@ const TablaEncuesta = () => {
           />
           <DeleteOutlined
             style={{ color: "#da4453" }}
-            onClick={() => handleDeleteEnc(record)}
+            //onClick={() => handleDeleteEnc(record)}
           />
         </Space>
       ),
@@ -234,7 +234,7 @@ const TablaEncuesta = () => {
   const [recordToVerEnc, setRecordToVerEnc] = useState(null);
   const [recordToAddFile, setRecordToAddFile] = useState(null);
   const [recordToVerLote, setRecordToVerLote] = useState(null);
-  const [recordToDeleteEnc, setRecordToDeleteEnc] = useState(null);
+  //const [recordToDeleteEnc, setRecordToDeleteEnc] = useState(null);
 
   const handleEdit = (record) => {
     setTitle("Editar Encuesta Siembra");
@@ -266,11 +266,11 @@ const TablaEncuesta = () => {
     setIsDrawerVisible(true);
   };
 
-  const handleDeleteEnc = (record) => {
-    setTitle("Eliminar Encuesta Siembra");
-    setRecordToDeleteEnc(record);
-    setIsDrawerVisible(true);
-  };
+  // const handleDeleteEnc = (record) => {
+  //   setTitle("Eliminar Encuesta Siembra");
+  //   setRecordToDeleteEnc(record);
+  //   setIsDrawerVisible(true);
+  // };
 
   const handleDrawerClose = () => {
     setRecordToEdit(null);
@@ -278,7 +278,7 @@ const TablaEncuesta = () => {
     setRecordToVerEnc(null);
     handleAddFile(null);
     setRecordToVerLote(null);
-    handleDeleteEnc(null);
+   // handleDeleteEnc(null);
     setIsDrawerVisible(false);
   };
 
@@ -330,13 +330,6 @@ const TablaEncuesta = () => {
             <div>
               <p>Nombre: {recordToVerLote.name}</p>
               <p>Cultivo: {recordToVerLote.cultivo}</p>
-              {/* ... y así sucesivamente para los demás campos */}
-            </div>
-          )}
-          {recordToDeleteEnc && (
-            <div>
-              <p>Nombre: {recordToDeleteEnc.name}</p>
-              <p>Cultivo: {recordToDeleteEnc.cultivo}</p>
               {/* ... y así sucesivamente para los demás campos */}
             </div>
           )}
