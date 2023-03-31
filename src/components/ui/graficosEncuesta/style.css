@@ -1,0 +1,12 @@
+.div_contentGraf{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 250px;
+    /* border: 1px solid red; */
+}
+
+.grafUno{
+    /* border: 1px solid green; */
+}
