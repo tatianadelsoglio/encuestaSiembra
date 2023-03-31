@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import "./style.css";
-import { Button, Drawer, Space, Table, Tag } from "antd";
+import {Drawer, Space, Table, Tag } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
