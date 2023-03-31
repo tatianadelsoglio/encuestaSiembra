@@ -1,12 +1,16 @@
 /* eslint-disable no-unused-vars */
-import {PlusOutlined } from "@ant-design/icons";
-import { Button, Drawer, Select } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button, Drawer, Form, Select } from "antd";
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import "./style.css";
 
 const SelectsEncuesta = () => {
   const { appStage, setAppStage } = useContext(GlobalContext);
+
+
+  const { Option } = Select;
+  const [form] = Form.useForm();
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -27,7 +31,14 @@ const SelectsEncuesta = () => {
   };
 
   const onClose = () => {
+    form.resetFields();
     setOpen(false);
+  };
+
+  
+
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
   };
 
   return (
@@ -180,9 +191,63 @@ const SelectsEncuesta = () => {
               onClose={onClose}
               open={open}
             >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
+              <div className="div_drawerWrapper">
+                <Form
+                form={form}
+                  name="validate_other"
+                  layout="vertical"
+                //   {...formItemLayout}
+                  onFinish={onFinish}
+                >
+                  <Form.Item
+                    name="estado"
+                    label="Estado"
+                  >
+                    <Select placeholder="Seleccione Estado" style={{width:"300px"}}>
+                      <Option value="1">ENCUESTA OK</Option>
+                      <Option value="2">NO ENCUESTADO</Option>
+                      <Option value="3">NO ACCEDE</Option>
+                      <Option value="4">NO SIEMBRA</Option>                     
+                    </Select>
+                  </Form.Item>
+
+                  <Form.Item
+                    name="cliente"
+                    label="Cliente"
+                  >
+                    <Select placeholder="Seleccione Cliente" style={{width:"300px"}}>
+                      <Option value="1">ACONCAGUA S.R.L.</Option>
+                      <Option value="2">SABO OSVALDO</Option>
+                      <Option value="3">3 ARROYOS</Option>
+                      <Option value="4">A.P.I.N.T.A.</Option>                     
+                    </Select>
+                  </Form.Item>
+
+                  <Form.Item
+                    name="lote"
+                    label="Lotes"
+                  >
+                    <Select mode="multiple" placeholder="Seleccione Lote/s" style={{width:"300px"}}>
+                      <Option value="1">LOTE 1</Option>
+                      <Option value="2">LOTE 2</Option>
+                      <Option value="3">LOTE 3</Option>
+                      <Option value="4">LOTE 4</Option>                     
+                    </Select>
+                  </Form.Item>
+
+                  <Form.Item
+                    name="cosecha"
+                    label="Cosecha"
+                  >
+                    <Select placeholder="Seleccione Cosecha" style={{width:"150px"}}>
+                      <Option value="1">2223</Option>
+                      <Option value="2">2122</Option>
+                      <Option value="3">2021</Option>
+                      <Option value="4">1920</Option>                     
+                    </Select>
+                  </Form.Item>
+                </Form>
+              </div>
             </Drawer>
           </div>
         </>
