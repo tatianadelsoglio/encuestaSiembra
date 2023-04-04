@@ -273,31 +273,32 @@ const TablaEncuesta = () => {
   const [form] = Form.useForm();
 
   const handleEdit = (record) => {
-    setTitle("Editar Encuesta Siembra");
+    setTitle(`Editar Encuesta Siembra / ${record.name}`);
     setRecordToEdit(record);
     setIsDrawerVisible(true);
   };
 
   const handleAddEvent = (record) => {
-    setTitle("Agregar Evento");
+    setTitle(`Agregar Evento / ${record.name}`);
     setRecordToAddEvent(record);
     setIsDrawerVisible(true);
   };
 
   const handleVerEnc = (record) => {
-    setTitle("Ver Encuesta Siembra");
+    setTitle(`Ver Encuesta Siembra / ${record.name}`);
     setRecordToVerEnc(record);
     setIsDrawerVisible(true);
   };
 
   const handleAddFile = (record) => {
     setTitle("Subir Archivo");
+    //setTitle(`Subir Archivo / ${record.name}`);
     setRecordToAddFile(record);
     setIsDrawerVisible(true);
   };
 
   const handleVerLote = (record) => {
-    setTitle("Ver Lote");
+    setTitle(`Ver Lote / ${record.name}`);
     setRecordToVerLote(record);
     setIsDrawerVisible(true);
   };
@@ -316,6 +317,7 @@ const TablaEncuesta = () => {
     setRecordToVerLote(null);
     // handleDeleteEnc(null);
     setIsDrawerVisible(false);
+    //form.resetFields();
   };
 
   const onFinishEdit = (values) => {
