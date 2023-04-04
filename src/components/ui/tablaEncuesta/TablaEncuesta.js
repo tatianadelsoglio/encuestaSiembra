@@ -32,7 +32,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "2",
@@ -42,7 +42,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "3",
@@ -52,7 +52,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "4",
@@ -62,7 +62,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "5",
@@ -72,7 +72,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "6",
@@ -82,7 +82,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "7",
@@ -92,7 +92,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "8",
@@ -102,7 +102,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "9",
@@ -112,7 +112,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "10",
@@ -122,7 +122,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "11",
@@ -132,7 +132,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "12",
@@ -142,7 +142,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "13",
@@ -152,7 +152,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
     {
       key: "14",
@@ -162,7 +162,7 @@ const TablaEncuesta = () => {
       sup: 210,
       rinde: 200,
       costo: 300,
-      estado: ["ok"],
+      estado: ["ENCUESTA OK"],
     },
   ];
 
@@ -210,15 +210,18 @@ const TablaEncuesta = () => {
       render: (_, { estado }) => (
         <>
           {estado.map((e) => {
-            let color = e.length > 5 ? "geekblue" : "green";
-            if (e === "loser") {
-              color = "volcano";
+            if (e === "ENCUESTA OK"){
+              e = "OK";
+              let color = e.length > 5 ? "geekblue" : "green";
+              if (e === "loser") {
+                color = "volcano";
+              }
+              return (
+                <Tag color={color} key={e}>
+                  {e.toUpperCase()}
+                </Tag>
+              );
             }
-            return (
-              <Tag color={color} key={e}>
-                {e.toUpperCase()}
-              </Tag>
-            );
           })}
         </>
       ),
@@ -317,7 +320,6 @@ const TablaEncuesta = () => {
     setRecordToVerLote(null);
     // handleDeleteEnc(null);
     setIsDrawerVisible(false);
-    //form.resetFields();
   };
 
   const onFinishEdit = (values) => {
