@@ -1,19 +1,23 @@
 /* eslint-disable no-unused-vars */
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Drawer, Form, Select } from "antd";
+import { Button, DatePicker, Drawer, Form, Input, Select } from "antd";
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import "./style.css";
+import dayjs from 'dayjs';
 
 const SelectsEncuesta = () => {
   const { appStage, setAppStage } = useContext(GlobalContext);
-
 
   const { Option } = Select;
   const [form] = Form.useForm();
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
+  };
+
+  const onChangeFecha = (date, dateString) => {
+    console.log(date, dateString);
   };
 
   const onSearch = (value) => {
@@ -35,11 +39,11 @@ const SelectsEncuesta = () => {
     setOpen(false);
   };
 
-  
-
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+
+  const dateFormatList = ['DD/MM/YYYY'];
 
   return (
     <>
@@ -190,61 +194,130 @@ const SelectsEncuesta = () => {
               placement="right"
               onClose={onClose}
               open={open}
+              
             >
               <div className="div_drawerWrapper">
                 <Form
-                form={form}
+                  form={form}
                   name="validate_other"
                   layout="vertical"
-                //   {...formItemLayout}
+                  //   {...formItemLayout}
                   onFinish={onFinish}
                 >
-                  <Form.Item
-                    name="estado"
-                    label="Estado"
-                  >
-                    <Select placeholder="Seleccione Estado" style={{width:"300px"}}>
+                  <Form.Item name="estado" label="Estado">
+                    <Select
+                      placeholder="Seleccione Estado"
+                      style={{ width: "300px" }}
+                    >
                       <Option value="1">ENCUESTA OK</Option>
                       <Option value="2">NO ENCUESTADO</Option>
                       <Option value="3">NO ACCEDE</Option>
-                      <Option value="4">NO SIEMBRA</Option>                     
+                      <Option value="4">NO SIEMBRA</Option>
                     </Select>
                   </Form.Item>
 
-                  <Form.Item
-                    name="cliente"
-                    label="Cliente"
-                  >
-                    <Select placeholder="Seleccione Cliente" style={{width:"300px"}}>
+                  <Form.Item name="cliente" label="Cliente">
+                    <Select
+                      placeholder="Seleccione Cliente"
+                      style={{ width: "300px" }}
+                    >
                       <Option value="1">ACONCAGUA S.R.L.</Option>
                       <Option value="2">SABO OSVALDO</Option>
                       <Option value="3">3 ARROYOS</Option>
-                      <Option value="4">A.P.I.N.T.A.</Option>                     
+                      <Option value="4">A.P.I.N.T.A.</Option>
                     </Select>
                   </Form.Item>
 
-                  <Form.Item
-                    name="lote"
-                    label="Lotes"
-                  >
-                    <Select mode="multiple" placeholder="Seleccione Lote/s" style={{width:"300px"}}>
+                  <Form.Item name="lote" label="Lotes">
+                    <Select
+                      mode="multiple"
+                      placeholder="Seleccione Lote/s"
+                      style={{ width: "300px" }}
+                    >
                       <Option value="1">LOTE 1</Option>
                       <Option value="2">LOTE 2</Option>
                       <Option value="3">LOTE 3</Option>
-                      <Option value="4">LOTE 4</Option>                     
+                      <Option value="4">LOTE 4</Option>
                     </Select>
                   </Form.Item>
-
-                  <Form.Item
-                    name="cosecha"
-                    label="Cosecha"
-                  >
-                    <Select placeholder="Seleccione Cosecha" style={{width:"150px"}}>
-                      <Option value="1">2223</Option>
-                      <Option value="2">2122</Option>
-                      <Option value="3">2021</Option>
-                      <Option value="4">1920</Option>                     
-                    </Select>
+                  <div className="divFormEstruc">
+                    <Form.Item name="cosecha" label="Cosecha">
+                      <Select
+                        placeholder="Seleccione Cosecha"
+                        style={{ width: "150px" }}
+                      >
+                        <Option value="1">2223</Option>
+                        <Option value="2">2122</Option>
+                        <Option value="3">2021</Option>
+                        <Option value="4">1920</Option>
+                      </Select>
+                    </Form.Item>
+                    <Form.Item name="cultivo" label="Cultivo">
+                      <Select
+                        placeholder="Seleccione Cultivo"
+                        style={{ width: "150px" }}
+                      >
+                        <Option value="1">SOJA</Option>
+                        <Option value="2">MAIZ</Option>
+                        <Option value="3">TRIGO</Option>
+                        <Option value="4">CEBADA</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className="divFormEstruc">
+                    <Form.Item name="ciclo" label="Ciclo">
+                      <Select
+                        placeholder="Seleccione Ciclo"
+                        style={{ width: "150px" }}
+                      >
+                        <Option value="1">1</Option>
+                        <Option value="2">2</Option>
+                      </Select>
+                    </Form.Item>
+                    <Form.Item
+                      name="hasEstimadas"
+                      label="Has. Estimadas"
+                      style={{ marginLeft: "31px" }}
+                    >
+                      <Input style={{ width: "150px" }} />
+                    </Form.Item>
+                  </div>
+                  <div className="divFormEstruc">
+                    <Form.Item name="rindeTT" label="Rinde (TT)">
+                      <Input style={{ width: "150px" }} />
+                    </Form.Item>
+                    <Form.Item
+                      name="costo"
+                      label="Costo (U$S)"
+                      style={{ marginLeft: "31px" }}
+                    >
+                      <Input style={{ width: "150px" }} />
+                    </Form.Item>
+                  </div>
+                  <div className="divFormEstruc">
+                    <Form.Item name="fechaSiembra" label="Fecha de Siembra">
+                      <DatePicker onChange={onChangeFecha} format={dateFormatList}/>
+                    </Form.Item>
+                    <Form.Item
+                      name="cultivoAnterior"
+                      label="Cultivo Anterior"
+                      style={{ marginLeft: "31px" }}
+                    >
+                      <Select
+                        placeholder="Seleccione Cultivo Anterior"
+                        style={{ width: "150px" }}
+                      >
+                        <Option value="1">SOJA</Option>
+                        <Option value="2">MAIZ</Option>
+                        <Option value="3">TRIGO</Option>
+                        <Option value="4">CEBADA</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <Form.Item>
+                    <Button type="primary" htmlType="submit" style={{width:"100%", marginTop:"12px"}}>
+                      Guardar
+                    </Button>
                   </Form.Item>
                 </Form>
               </div>
