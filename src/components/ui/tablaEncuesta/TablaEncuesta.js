@@ -179,7 +179,7 @@ const TablaEncuesta = () => {
       key: "cultivo",
       align: "center",
       render: (text, record) => {
-        if (record.cultivo === 'TRIGO') {
+        if (record.cultivo === "TRIGO") {
           return text;
         }
         return `${text} / ${record.ciclo}°`;
@@ -210,7 +210,7 @@ const TablaEncuesta = () => {
       render: (_, { estado }) => (
         <>
           {estado.map((e) => {
-            if (e === "ENCUESTA OK"){
+            if (e === "ENCUESTA OK") {
               e = "OK";
               let color = e.length > 5 ? "geekblue" : "green";
               if (e === "loser") {
@@ -261,39 +261,42 @@ const TablaEncuesta = () => {
       align: "center",
     },
   ];
-  
 
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [title, setTitle] = useState("");
-  const [recordToEdit, setRecordToEdit] = useState(null);
-  const [recordToAddEvent, setRecordToAddEvent] = useState(null);
-  const [recordToVerEnc, setRecordToVerEnc] = useState(null);
-  const [recordToAddFile, setRecordToAddFile] = useState(null);
-  const [recordToVerLote, setRecordToVerLote] = useState(null);
+  const [recordToEdit, setRecordToEdit] = useState("");
+  const [recordToAddEvent, setRecordToAddEvent] = useState("");
+  const [recordToVerEnc, setRecordToVerEnc] = useState("");
+  const [recordToAddFile, setRecordToAddFile] = useState("");
+  const [recordToVerLote, setRecordToVerLote] = useState("");
   //const [recordToDeleteEnc, setRecordToDeleteEnc] = useState(null);
 
   const { Option } = Select;
   const [form] = Form.useForm();
 
   const handleEdit = (record) => {
+    form.resetFields();
     setTitle(`Editar Encuesta Siembra / ${record.name}`);
     setRecordToEdit(record);
     setIsDrawerVisible(true);
   };
 
   const handleAddEvent = (record) => {
-    setTitle(`Agregar Evento / ${record.name}`);
+    form.resetFields();
+    setTitle(`Agregar Evento / ${record.name} - Cultivo: ${record.cultivo} - Ciclo: ${record.ciclo}°`);
     setRecordToAddEvent(record);
     setIsDrawerVisible(true);
   };
 
   const handleVerEnc = (record) => {
+    form.resetFields();
     setTitle(`Ver Encuesta Siembra / ${record.name}`);
     setRecordToVerEnc(record);
     setIsDrawerVisible(true);
   };
 
   const handleAddFile = (record) => {
+    form.resetFields();
     setTitle("Subir Archivo");
     //setTitle(`Subir Archivo / ${record.name}`);
     setRecordToAddFile(record);
@@ -301,6 +304,7 @@ const TablaEncuesta = () => {
   };
 
   const handleVerLote = (record) => {
+    form.resetFields();
     setTitle(`Ver Lote / ${record.name}`);
     setRecordToVerLote(record);
     setIsDrawerVisible(true);
@@ -313,18 +317,24 @@ const TablaEncuesta = () => {
   // };
 
   const handleDrawerClose = () => {
-    setRecordToEdit(null);
-    setRecordToAddEvent(null);
-    setRecordToVerEnc(null);
-    handleAddFile(null);
-    setRecordToVerLote(null);
+    setRecordToEdit("");
+    setRecordToAddEvent("");
+    setRecordToVerEnc("");
+    setRecordToAddFile("");
+    setRecordToVerLote("");
     // handleDeleteEnc(null);
+    form.resetFields();
     setIsDrawerVisible(false);
   };
 
   const onFinishEdit = (values) => {
     console.log("Received values of form: ", values);
   };
+
+  const onFinishAddEvent = (values) => {
+    console.log("Received values of form: ", values);
+  };
+
 
   return (
     <>
@@ -341,9 +351,7 @@ const TablaEncuesta = () => {
           visible={isDrawerVisible}
           onClose={handleDrawerClose}
         >
-          {/* Aquí va el formulario para editar el registro */}
           {recordToEdit && (
-            
             <div className="div_drawerWrapper">
               {console.log(recordToEdit)}
               <Form
@@ -353,110 +361,184 @@ const TablaEncuesta = () => {
                 //   {...formItemLayout}
                 onFinish={onFinishEdit}
               >
-                <Form.Item name="estado" label="Estado">
+                <Form.Item
+                  name="estado"
+                  label="Estado"
+                  initialValue={recordToEdit.estado[0]}
+                >
                   <Select
                     placeholder="Seleccione Estado"
                     style={{ width: "300px" }}
-                    defaultValue={recordToEdit.estado}
                   >
-                    <Option value="1">ENCUESTA OK</Option>
-                    <Option value="2">NO ENCUESTADO</Option>
-                    <Option value="3">NO ACCEDE</Option>
-                    <Option value="4">NO SIEMBRA</Option>
+                    <Option value="ENCUESTA OK">ENCUESTA OK</Option>
+                    <Option value="NO ENCUESTADO">NO ENCUESTADO</Option>
+                    <Option value="NO ACCEDE">NO ACCEDE</Option>
+                    <Option value="NO SIEMBRA">NO SIEMBRA</Option>
                   </Select>
                 </Form.Item>
 
-                <Form.Item name="cliente" label="Cliente">
+                <Form.Item
+                  name="cliente"
+                  label="Cliente"
+                  initialValue={recordToEdit.name}
+                >
                   <Select
                     disabled
                     placeholder="Seleccione Cliente"
                     style={{ width: "300px" }}
-                    defaultValue={recordToEdit.name}
-                  >
-                  </Select>
+                  ></Select>
                 </Form.Item>
 
-                <Form.Item name="lote" label="Lotes">
+                <Form.Item
+                  name="lote"
+                  label="Lotes"
+                  initialValue={["LOTE 1", "LOTE 2"]}
+                >
                   <Select
                     disabled
                     mode="multiple"
                     placeholder="Seleccione Lote/s"
-                    defaultValue={["LOTE 1", "LOTE 2"]}
                     style={{ width: "300px" }}
-                  >
-                  </Select>
+                  ></Select>
                 </Form.Item>
                 <div className="divFormEstruc">
-                  <Form.Item name="cosecha" label="Cosecha">
+                  <Form.Item
+                    name="cosecha"
+                    label="Cosecha"
+                    initialValue={"2223"}
+                  >
                     <Select
                       disabled
                       placeholder="Seleccione Cosecha"
-                      defaultValue={"2223"}
                       style={{ width: "150px" }}
-                    >
-                      <Option value="1">2223</Option>
-                      <Option value="2">2122</Option>
-                      <Option value="3">2021</Option>
-                      <Option value="4">1920</Option>
-                    </Select>
+                    ></Select>
                   </Form.Item>
-                  <Form.Item name="cultivo" label="Cultivo">
+                  <Form.Item
+                    name="cultivo"
+                    label="Cultivo"
+                    initialValue={recordToEdit.cultivo}
+                  >
                     <Select
                       disabled
                       placeholder="Seleccione Cultivo"
-                      defaultValue={recordToEdit.cultivo}
                       style={{ width: "150px" }}
-                    >
-                    </Select>
+                    ></Select>
                   </Form.Item>
                 </div>
                 <div className="divFormEstruc">
-                  <Form.Item name="ciclo" label="Ciclo">
+                  <Form.Item
+                    name="ciclo"
+                    label="Ciclo"
+                    initialValue={recordToEdit.ciclo}
+                  >
                     <Select
                       disabled
                       placeholder="Seleccione Ciclo"
-                      defaultValue={recordToEdit.ciclo}
                       style={{ width: "150px" }}
-                    >
-                    </Select>
+                    ></Select>
                   </Form.Item>
                   <Form.Item
                     name="hasEstimadas"
                     label="Has. Estimadas"
                     style={{ marginLeft: "31px" }}
+                    initialValue={recordToEdit.sup}
                   >
-                    <Input defaultValue={recordToEdit.sup} style={{ width: "150px" }} />
+                    <Input style={{ width: "150px" }} />
                   </Form.Item>
                 </div>
                 <div className="divFormEstruc">
-                  <Form.Item name="rindeTT" label="Rinde (TT)">
-                    <Input defaultValue={recordToEdit.rinde} style={{ width: "150px" }} />
+                  <Form.Item
+                    name="rindeTT"
+                    label="Rinde (TT)"
+                    initialValue={recordToEdit.rinde}
+                  >
+                    <Input style={{ width: "150px" }} />
                   </Form.Item>
                   <Form.Item
                     name="costo"
                     label="Costo (U$S)"
                     style={{ marginLeft: "31px" }}
+                    initialValue={recordToEdit.costo}
                   >
-                    <Input defaultValue={recordToEdit.costo} style={{ width: "150px" }} />
+                    <Input style={{ width: "150px" }} />
                   </Form.Item>
                 </div>
+
                 <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{ width: "100%", marginTop: "20px" }}
-                  >
-                    Guardar
-                  </Button>
+                  <div className="divFormEstruc">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      style={{ width: "100%", marginTop: "20px" }}
+                    >
+                      Guardar
+                    </Button>
+                    <Button
+                      type="primary"
+                      danger
+                      onClick={() => handleDrawerClose()}
+                      style={{
+                        width: "100%",
+                        marginTop: "20px",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
                 </Form.Item>
               </Form>
             </div>
           )}
           {recordToAddEvent && (
-            <div>
-              <p>Nombre: {recordToAddEvent.name}</p>
-              <p>Cultivo: {recordToAddEvent.cultivo}</p>
-              {/* ... y así sucesivamente para los demás campos */}
+            <div className="div_drawerWrapper">
+              {console.log(recordToAddEvent)}
+              <Form
+                form={form}
+                name="validate_other"
+                layout="vertical"
+                //   {...formItemLayout}
+                onFinish={onFinishAddEvent}
+              >
+                <Form.Item
+                  name="tipoEvento"
+                  label="Tipo de Evento"
+                >
+                  <Select
+                    placeholder="Seleccione"
+                    style={{ width: "300px" }}
+                  >
+                    <Option value="RINDE REAL">RINDE REAL</Option>
+                    <Option value="ESTIMADO ACOPIO">ESTIMADO ACOPIO</Option>
+                    <Option value="HAS. REALES">HAS. REALES</Option>
+                    <Option value="DESTINO">DESTINO</Option>
+                  </Select>
+                </Form.Item>
+
+                <Form.Item>
+                  <div className="divFormEstruc">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      style={{ width: "100%", marginTop: "20px" }}
+                    >
+                      Guardar
+                    </Button>
+                    <Button
+                      
+                      danger
+                      onClick={() => handleDrawerClose()}
+                      style={{
+                        width: "100%",
+                        marginTop: "20px",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                </Form.Item>
+              </Form>
             </div>
           )}
           {recordToVerEnc && (
