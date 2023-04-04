@@ -495,10 +495,10 @@ const TablaEncuesta = () => {
           {recordToAddEvent && (
             <div className="div_drawerWrapper">
               {console.log(recordToAddEvent)}
-              <Card style={{ width: 300 }}>
-                <div style={{display:"flex", flexDirection:"row"}}>
+              <Card style={{ width: 300, height:"30px !important", marginBottom:"20px", border:"dasher" }}>
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
                   <p>Cultivo:{recordToAddEvent.cultivo}</p>
-                  <p>Ciclo: {recordToAddEvent.ciclo}°</p>
+                  <p style={{marginLeft:""}}>Ciclo: {recordToAddEvent.ciclo}°</p>
                 </div>
               </Card>
               <Form
