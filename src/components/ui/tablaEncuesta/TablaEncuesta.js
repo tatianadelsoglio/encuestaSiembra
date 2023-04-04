@@ -271,6 +271,11 @@ const TablaEncuesta = () => {
   const [recordToAddFile, setRecordToAddFile] = useState("");
   const [recordToVerLote, setRecordToVerLote] = useState("");
   //const [recordToDeleteEnc, setRecordToDeleteEnc] = useState(null);
+  const [tipoEvento, setTipoEvento] = useState(""); // estado para guardar el tipo de evento seleccionado
+
+  const handleTipoEventoChange = (value) => {
+    setTipoEvento(value); // actualizamos el estado con el valor seleccionado en el Select
+  };
 
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -284,9 +289,7 @@ const TablaEncuesta = () => {
 
   const handleAddEvent = (record) => {
     form.resetFields();
-    setTitle(
-      `Agregar Evento / ${record.name}`
-    );
+    setTitle(`Agregar Evento / ${record.name}`);
     setRecordToAddEvent(record);
     setIsDrawerVisible(true);
   };
@@ -320,13 +323,15 @@ const TablaEncuesta = () => {
   // };
 
   const handleDrawerClose = () => {
+    form.resetFields();
     setRecordToEdit("");
+    setTipoEvento("");
     setRecordToAddEvent("");
     setRecordToVerEnc("");
     setRecordToAddFile("");
     setRecordToVerLote("");
     // handleDeleteEnc(null);
-    form.resetFields();
+
     setIsDrawerVisible(false);
   };
 
@@ -335,6 +340,10 @@ const TablaEncuesta = () => {
   };
 
   const onFinishAddEvent = (values) => {
+    console.log("Received values of form: ", values);
+  };
+
+  const onFinishVerEnc = (values) => {
     console.log("Received values of form: ", values);
   };
 
@@ -476,13 +485,13 @@ const TablaEncuesta = () => {
                       Guardar
                     </Button>
                     <Button
-                      type="primary"
-                      danger
                       onClick={() => handleDrawerClose()}
                       style={{
                         width: "100%",
                         marginTop: "20px",
                         marginLeft: "5px",
+                        borderColor: "#5bbc34",
+                        color: "#5bbc34",
                       }}
                     >
                       Cancelar
@@ -495,10 +504,24 @@ const TablaEncuesta = () => {
           {recordToAddEvent && (
             <div className="div_drawerWrapper">
               {console.log(recordToAddEvent)}
-              <Card style={{ width: 300, height:"30px !important", marginBottom:"20px", border:"dasher" }}>
-                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
-                  <p>Cultivo:{recordToAddEvent.cultivo}</p>
-                  <p style={{marginLeft:""}}>Ciclo: {recordToAddEvent.ciclo}°</p>
+              <Card
+                style={{
+                  width: 300,
+                  marginBottom: "20px",
+                  border: "1px dashed #5bbc34",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <p>Cultivo: {recordToAddEvent.cultivo}</p>
+                  <p style={{ marginLeft: "" }}>
+                    Ciclo: {recordToAddEvent.ciclo}°
+                  </p>
                 </div>
               </Card>
               <Form
@@ -509,13 +532,73 @@ const TablaEncuesta = () => {
                 onFinish={onFinishAddEvent}
               >
                 <Form.Item name="tipoEvento" label="Tipo de Evento">
-                  <Select placeholder="Seleccione" style={{ width: "300px" }}>
+                  <Select
+                    placeholder="Seleccione"
+                    style={{ width: "300px" }}
+                    onChange={handleTipoEventoChange}
+                  >
                     <Option value="RINDE REAL">RINDE REAL</Option>
                     <Option value="ESTIMADO ACOPIO">ESTIMADO ACOPIO</Option>
                     <Option value="HAS. REALES">HAS. REALES</Option>
                     <Option value="DESTINO">DESTINO</Option>
                   </Select>
                 </Form.Item>
+
+                {tipoEvento === "RINDE REAL" && (
+                  <Form.Item name="rindeReal" label="Rinde Real (TT)">
+                    <Input
+                      placeholder="Ingrese valor"
+                      style={{ width: "300px" }}
+                    />
+                  </Form.Item>
+                )}
+
+                {tipoEvento === "ESTIMADO ACOPIO" && (
+                  <Form.Item name="estAcopio" label="% Est. Acopio">
+                    <Input
+                      placeholder="Ingrese valor"
+                      style={{ width: "300px" }}
+                    />
+                  </Form.Item>
+                )}
+
+                {tipoEvento === "HAS. REALES" && (
+                  <Form.Item
+                    name="superficieReal"
+                    label="Superficie Real (HAS)"
+                  >
+                    <Input
+                      placeholder="Ingrese valor"
+                      style={{ width: "300px" }}
+                    />
+                  </Form.Item>
+                )}
+
+                {tipoEvento === "DESTINO" && (
+                  <>
+                    <Form.Item name="destino" label="Destino">
+                      <Select
+                        placeholder="Seleccione"
+                        style={{ width: "300px" }}
+                      >
+                        <Option value="1">CONSUMO</Option>
+                        <Option value="2">SEMILLAS</Option>
+                        <Option value="3">COMERCIALIZACION</Option>
+                      </Select>
+                    </Form.Item>
+                    <Form.Item name="hectareas" label="Hectareas">
+                      <Input
+                        placeholder="Ingrese valor"
+                        style={{ width: "300px" }}
+                      />
+                    </Form.Item>
+                  </>
+                )}
+
+                {tipoEvento === "" && (
+                  <>
+                  </>
+                )}
 
                 <Form.Item>
                   <div className="divFormEstruc">
@@ -544,10 +627,48 @@ const TablaEncuesta = () => {
             </div>
           )}
           {recordToVerEnc && (
-            <div>
-              <p>Nombre: {recordToVerEnc.name}</p>
-              <p>Cultivo: {recordToVerEnc.cultivo}</p>
-              {/* ... y así sucesivamente para los demás campos */}
+            <div className="div_drawerWrapper">
+              {console.log(recordToVerEnc)}
+              <Form
+                form={form}
+                name="validate_other"
+                layout="vertical"
+                //   {...formItemLayout}
+                onFinish={onFinishVerEnc}
+              >
+                {/* <Form.Item name="tipoEvento" label="Tipo de Evento">
+                <Select placeholder="Seleccione" style={{ width: "300px" }}>
+                  <Option value="RINDE REAL">RINDE REAL</Option>
+                  <Option value="ESTIMADO ACOPIO">ESTIMADO ACOPIO</Option>
+                  <Option value="HAS. REALES">HAS. REALES</Option>
+                  <Option value="DESTINO">DESTINO</Option>
+                </Select>
+              </Form.Item> */}
+
+                <Form.Item>
+                  <div className="divFormEstruc">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      style={{ width: "100%", marginTop: "20px" }}
+                    >
+                      Guardar
+                    </Button>
+                    <Button
+                      onClick={() => handleDrawerClose()}
+                      style={{
+                        width: "100%",
+                        marginTop: "20px",
+                        marginLeft: "5px",
+                        borderColor: "#5bbc34",
+                        color: "#5bbc34",
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                </Form.Item>
+              </Form>
             </div>
           )}
           {recordToAddFile && (
