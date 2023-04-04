@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./style.css";
 import {
   Button,
+  Card,
   DatePicker,
   Drawer,
   Form,
@@ -283,7 +284,9 @@ const TablaEncuesta = () => {
 
   const handleAddEvent = (record) => {
     form.resetFields();
-    setTitle(`Agregar Evento / ${record.name} - Cultivo: ${record.cultivo} - Ciclo: ${record.ciclo}°`);
+    setTitle(
+      `Agregar Evento / ${record.name}`
+    );
     setRecordToAddEvent(record);
     setIsDrawerVisible(true);
   };
@@ -334,7 +337,6 @@ const TablaEncuesta = () => {
   const onFinishAddEvent = (values) => {
     console.log("Received values of form: ", values);
   };
-
 
   return (
     <>
@@ -493,6 +495,12 @@ const TablaEncuesta = () => {
           {recordToAddEvent && (
             <div className="div_drawerWrapper">
               {console.log(recordToAddEvent)}
+              <Card style={{ width: 300 }}>
+                <div style={{display:"flex", flexDirection:"row"}}>
+                  <p>Cultivo:{recordToAddEvent.cultivo}</p>
+                  <p>Ciclo: {recordToAddEvent.ciclo}°</p>
+                </div>
+              </Card>
               <Form
                 form={form}
                 name="validate_other"
@@ -500,14 +508,8 @@ const TablaEncuesta = () => {
                 //   {...formItemLayout}
                 onFinish={onFinishAddEvent}
               >
-                <Form.Item
-                  name="tipoEvento"
-                  label="Tipo de Evento"
-                >
-                  <Select
-                    placeholder="Seleccione"
-                    style={{ width: "300px" }}
-                  >
+                <Form.Item name="tipoEvento" label="Tipo de Evento">
+                  <Select placeholder="Seleccione" style={{ width: "300px" }}>
                     <Option value="RINDE REAL">RINDE REAL</Option>
                     <Option value="ESTIMADO ACOPIO">ESTIMADO ACOPIO</Option>
                     <Option value="HAS. REALES">HAS. REALES</Option>
@@ -525,13 +527,13 @@ const TablaEncuesta = () => {
                       Guardar
                     </Button>
                     <Button
-                      
-                      danger
                       onClick={() => handleDrawerClose()}
                       style={{
                         width: "100%",
                         marginTop: "20px",
                         marginLeft: "5px",
+                        borderColor: "#5bbc34",
+                        color: "#5bbc34",
                       }}
                     >
                       Cancelar
