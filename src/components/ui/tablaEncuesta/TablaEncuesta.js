@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   DatePicker,
+  Divider,
   Drawer,
   Form,
   Input,
@@ -23,146 +24,188 @@ import {
 } from "@ant-design/icons";
 
 const TablaEncuesta = () => {
-  //a esta data le falta cosecha y array de lotes
+  //a esta data le falta info de eventos
   const data = [
     {
       key: "1",
       name: "John Brown",
       cultivo: "MAIZ",
+      cultivoAnt: "TRIGO",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2122,
+      lotes: ["LOTE1", "LOTE2"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "2",
       name: "Jim Green",
       cultivo: "SOJA",
+      cultivoAnt: "MAIZ",
       ciclo: "2",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2122,
+      lotes: ["LOTE2", "LOTE3"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "3",
       name: "Joe Black",
       cultivo: "TRIGO",
+      cultivoAnt: "SOJA",
       ciclo: "",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2122,
+      lotes: ["LOTE4", "LOTE5"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "4",
       name: "Joe Black",
       cultivo: "SOJA",
+      cultivoAnt: "TRIGO",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2223,
+      lotes: ["LOTE1", "LOTE2"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "5",
       name: "John Brown",
       cultivo: "TRIGO",
+      cultivoAnt: "MAIZ",
       ciclo: "",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2223,
+      lotes: ["LOTE2", "LOTE3"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "6",
       name: "John Brown",
       cultivo: "MAIZ",
+      cultivoAnt: "SOJA",
       ciclo: "2",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2223,
+      lotes: ["LOTE3", "LOTE4"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "7",
       name: "Joe Black",
       cultivo: "SOJA",
+      cultivoAnt: "TRIGO",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2223,
+      lotes: ["LOTE4", "LOTE5"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "8",
       name: "Joe Black",
       cultivo: "TRIGO",
+      cultivoAnt: "MAIZ",
       ciclo: "",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE1", "LOTE2"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "9",
       name: "Joe Black",
       cultivo: "SOJA",
+      cultivoAnt: "TRIGO",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE2", "LOTE3"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "10",
       name: "John Brown",
       cultivo: "TRIGO",
+      cultivoAnt: "SOJA",
       ciclo: "",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE3", "LOTE4"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "11",
       name: "Jim Green",
       cultivo: "SOJA",
+      cultivoAnt: "TRIGO",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE4", "LOTE5"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "12",
       name: "Joe Black",
       cultivo: "SOJA",
+      cultivoAnt: "MAIZ",
       ciclo: "2",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE5", "LOTE6"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "13",
       name: "Jim Green",
       cultivo: "MAIZ",
+      cultivoAnt: "SOJA",
       ciclo: "1",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE2", "LOTE3", "LOTE4", "LOTE5"],
       estado: ["ENCUESTA OK"],
     },
     {
       key: "14",
       name: "Jim Green",
       cultivo: "MAIZ",
+      cultivoAnt: "TRIGO",
       ciclo: "2",
       sup: 210,
       rinde: 200,
       costo: 300,
+      cosecha: 2324,
+      lotes: ["LOTE2", "LOTE3", "LOTE4", "LOTE5"],
       estado: ["ENCUESTA OK"],
     },
   ];
@@ -263,6 +306,72 @@ const TablaEncuesta = () => {
     },
   ];
 
+  const dataLote = [
+    {
+      key: "1",
+      campo: "EL HORIZONTE 1",
+      lote: "SUR",
+      has: "50",
+    },
+    {
+      key: "2",
+      campo: "ESTANCIA NORTE",
+      lote: "NORTE",
+      has: "150",
+    },
+    {
+      key: "3",
+      campo: "EL HORIZONTE 2",
+      lote: "ESTE",
+      has: "250",
+    },
+    {
+      key: "4",
+      campo: "LOTE MAYRA",
+      lote: "CENTRO",
+      has: "100",
+    },
+    {
+      key: "5",
+      campo: "RAMIREZ",
+      lote: "SUR",
+      has: "350",
+    },
+    {
+      key: "6",
+      campo: "DELSOGLIO",
+      lote: "NORTE",
+      has: "250",
+    },
+    {
+      key: "7",
+      campo: "EL HORIZONTE 1",
+      lote: "ESTE",
+      has: "150",
+    },
+  ];
+
+  const columnsLote = [
+    {
+      title: "CAMPO",
+      dataIndex: "campo",
+      key: "campo",
+      render: (text) => text,
+    },
+    {
+      title: "LOTE",
+      dataIndex: "lote",
+      key: "lote",
+      render: (text) => text,
+    },
+    {
+      title: "HAS",
+      dataIndex: "has",
+      key: "has",
+      render: (text) => text,
+    },
+  ];
+
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [recordToEdit, setRecordToEdit] = useState("");
@@ -282,21 +391,21 @@ const TablaEncuesta = () => {
 
   const handleEdit = (record) => {
     form.resetFields();
-    setTitle(`Editar Encuesta Siembra / ${record.name}`);
+    setTitle(`EDITAR ENCUESTA SIEMBRA / ${record.name}`);
     setRecordToEdit(record);
     setIsDrawerVisible(true);
   };
 
   const handleAddEvent = (record) => {
     form.resetFields();
-    setTitle(`Agregar Evento / ${record.name}`);
+    setTitle(`AGREGAR EVENTO / ${record.name}`);
     setRecordToAddEvent(record);
     setIsDrawerVisible(true);
   };
 
   const handleVerEnc = (record) => {
     form.resetFields();
-    setTitle(`Ver Encuesta Siembra / ${record.name}`);
+    setTitle(`INFORMACIÓN DE ENCUESTA / ${record.name}`);
     setRecordToVerEnc(record);
     setIsDrawerVisible(true);
   };
@@ -343,10 +452,6 @@ const TablaEncuesta = () => {
     console.log("Received values of form: ", values);
   };
 
-  const onFinishVerEnc = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
   return (
     <>
       <div className="div_contentTabla">
@@ -361,6 +466,7 @@ const TablaEncuesta = () => {
           title={title}
           visible={isDrawerVisible}
           onClose={handleDrawerClose}
+          width={450}
         >
           {recordToEdit && (
             <div className="div_drawerWrapper">
@@ -504,26 +610,29 @@ const TablaEncuesta = () => {
           {recordToAddEvent && (
             <div className="div_drawerWrapper">
               {console.log(recordToAddEvent)}
-              <Card
-                style={{
-                  width: 300,
-                  marginBottom: "20px",
-                  border: "1px dashed #5bbc34",
-                }}
-              >
-                <div
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Card
                   style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-around",
+                    width: 300,
+                    marginBottom: "20px",
+                    border: "1px dashed #5bbc34",
                   }}
                 >
-                  <p>Cultivo: {recordToAddEvent.cultivo}</p>
-                  <p style={{ marginLeft: "" }}>
-                    Ciclo: {recordToAddEvent.ciclo}°
-                  </p>
-                </div>
-              </Card>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <p>Cultivo: {recordToAddEvent.cultivo}</p>
+                    <p style={{ marginLeft: "" }}>
+                      Ciclo: {recordToAddEvent.ciclo}°
+                    </p>
+                  </div>
+                </Card>
+              </div>
+
               <Form
                 form={form}
                 name="validate_other"
@@ -595,10 +704,7 @@ const TablaEncuesta = () => {
                   </>
                 )}
 
-                {tipoEvento === "" && (
-                  <>
-                  </>
-                )}
+                {tipoEvento === "" && <></>}
 
                 <Form.Item>
                   <div className="divFormEstruc">
@@ -629,53 +735,104 @@ const TablaEncuesta = () => {
           {recordToVerEnc && (
             <div className="div_drawerWrapper">
               {console.log(recordToVerEnc)}
-              <Form
-                form={form}
-                name="validate_other"
-                layout="vertical"
-                //   {...formItemLayout}
-                onFinish={onFinishVerEnc}
+              <div className="divFormEstruc">
+                <div className="divCentrado">
+                  <h3 className="h3Style">Cosecha</h3>
+                  <p className="pStyle">{recordToVerEnc.cosecha}</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Cultivo/Ciclo</h3>
+                  <p className="pStyle">
+                    {recordToVerEnc.cultivo} / {recordToVerEnc.ciclo}°
+                  </p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Cultivo Ant</h3>
+                  <p className="pStyle">{recordToVerEnc.cultivoAnt}</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Estado</h3>
+                  <p className="pStyle">{recordToVerEnc.estado}</p>
+                </div>
+              </div>
+              <Divider />
+              <div className="divFormEstruc">
+                <div className="divCentrado">
+                  <h3 className="h3Style">Fecha Siembra</h3>
+                  <p className="pStyle">20/12/2022</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Sup.(Has)</h3>
+                  <p className="pStyle">{recordToVerEnc.sup}</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Rinde(TT)</h3>
+                  <p className="pStyle">{recordToVerEnc.rinde}</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Costo(U$S)</h3>
+                  <p className="pStyle">{recordToVerEnc.costo}</p>
+                </div>
+              </div>
+              <Divider />
+              <h3 className="subTitleStyle">Eventos</h3>
+              <div className="divFormEstruc">
+                <div className="divCentrado">
+                  <h3 className="h3Style">Sup. Real</h3>
+                  <p className="pStyle">0</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Rinde Real</h3>
+                  <p className="pStyle">0</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">% Est. Acopio</h3>
+                  <p className="pStyle">0</p>
+                </div>
+                <Divider type="vertical" style={{ height: "40px" }} />
+                <div className="divCentrado">
+                  <h3 className="h3Style">Destino</h3>
+                  <p className="pStyle">0</p>
+                </div>
+              </div>
+              <Divider />
+              <h3 className="subTitleStyle">Archivos</h3>
+              <div className="divFormEstruc">Aca va lista de archivos</div>
+              <Divider />
+              <h3 className="subTitleStyle">Lotes</h3>
+              <div className="divFormEstruc">
+                <Table
+                  columns={columnsLote}
+                  dataSource={dataLote}
+                  size={"small"}
+                  pagination={{ pageSize: 3 }}
+                  style={{ border: "1px solid #e8e8e8", width: "400px" }}
+                />
+              </div>
+              <Divider />
+              <Button
+                onClick={() => handleDrawerClose()}
+                style={{
+                  width: "100%",
+                  borderColor: "#5bbc34",
+                  color: "#5bbc34",
+                }}
               >
-                {/* <Form.Item name="tipoEvento" label="Tipo de Evento">
-                <Select placeholder="Seleccione" style={{ width: "300px" }}>
-                  <Option value="RINDE REAL">RINDE REAL</Option>
-                  <Option value="ESTIMADO ACOPIO">ESTIMADO ACOPIO</Option>
-                  <Option value="HAS. REALES">HAS. REALES</Option>
-                  <Option value="DESTINO">DESTINO</Option>
-                </Select>
-              </Form.Item> */}
-
-                <Form.Item>
-                  <div className="divFormEstruc">
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      style={{ width: "100%", marginTop: "20px" }}
-                    >
-                      Guardar
-                    </Button>
-                    <Button
-                      onClick={() => handleDrawerClose()}
-                      style={{
-                        width: "100%",
-                        marginTop: "20px",
-                        marginLeft: "5px",
-                        borderColor: "#5bbc34",
-                        color: "#5bbc34",
-                      }}
-                    >
-                      Cancelar
-                    </Button>
-                  </div>
-                </Form.Item>
-              </Form>
+                Cerrar
+              </Button>
             </div>
           )}
           {recordToAddFile && (
             <div>
-              <p>Nombre: {recordToAddFile.name}</p>
-              <p>Cultivo: {recordToAddFile.cultivo}</p>
-              {/* ... y así sucesivamente para los demás campos */}
+              ACA VA UPLOAD
             </div>
           )}
           {recordToVerLote && (

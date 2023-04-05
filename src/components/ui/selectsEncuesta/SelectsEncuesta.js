@@ -194,7 +194,7 @@ const SelectsEncuesta = () => {
               placement="right"
               onClose={onClose}
               open={open}
-              
+              width={400}
             >
               <div className="div_drawerWrapper">
                 <Form
