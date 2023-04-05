@@ -21,14 +21,19 @@ const VistaEncuesta = () => {
                     <div>
                         <GraficosEncuesta/>
                     </div>
-                    <div>
-                        <TablaEncuesta/>
-                    </div>
                 </div>
 
             ):(
                 <div className='div_wrapper'>
-                    <h1>Vista en partes de la encuesta</h1>
+                    <div className='div_titulo'>
+                        <h3 className='titulo'>ENCUESTA DE SIEMBRA</h3>
+                    </div>
+                    <div className='div_contentSelect'>
+                        <SelectsEncuesta/>
+                    </div>
+                    <div>
+                        <TablaEncuesta/>
+                    </div>
                 </div>
             )}
         </>

@@ -837,9 +837,7 @@ const TablaEncuesta = () => {
           )}
           {recordToVerLote && (
             <div>
-              <p>Nombre: {recordToVerLote.name}</p>
-              <p>Cultivo: {recordToVerLote.cultivo}</p>
-              {/* ... y así sucesivamente para los demás campos */}
+              ACA VA MAPA LOTE
             </div>
           )}
         </Drawer>
